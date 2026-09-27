@@ -1,0 +1,10 @@
+{
+  "name": "Wallet A Desk",
+  "consumable": "Desk chip",
+  "price": "1000000000000000000",
+  "outcomes": [
+    { "name": "Flat tape", "chanceBps": 5000, "reward": "500000000000000000" },
+    { "name": "Clean fill", "chanceBps": 3500, "reward": "1000000000000000000" },
+    { "name": "Rare print", "chanceBps": 1500, "reward": "2000000000000000000" }
+  ]
+}

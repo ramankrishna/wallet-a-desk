@@ -1,0 +1,285 @@
+.desk {
+  --ink: #241c14;
+  --paper: #f3e7d1;
+  --paper-2: #e7d7b8;
+  --night: #14110e;
+  --night-2: #221c16;
+  --brass: #e2b15a;
+  --brass-deep: #8a5a16;
+  --up: #0d6a45;
+  --up-on-dark: #8fd9b4;
+  --down: #8d2e2a;
+  --down-on-dark: #f0a8a2;
+  --muted: #8d7f6c;
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  display: grid;
+  grid-template-rows: auto minmax(0, 1fr) auto;
+  color: var(--paper);
+  background:
+    radial-gradient(90% 40% at 80% 0%, rgba(226, 177, 90, 0.16), transparent 55%),
+    var(--night);
+  font: 15px/1.35 "Avenir Next", "Segoe UI", sans-serif;
+  container: desk / size;
+}
+.desk, .desk * { box-sizing: border-box; }
+.desk h1, .desk h2, .desk p, .desk ol, .desk ul, .desk dl { margin: 0; }
+.desk button, .desk input { font: inherit; color: inherit; }
+.desk button {
+  min-height: 44px;
+  padding: 8px 10px;
+  border: 1px solid transparent;
+  border-radius: 8px;
+  background: transparent;
+  cursor: pointer;
+}
+.desk button:disabled { opacity: 0.42; cursor: default; }
+.desk button:focus-visible, .desk input:focus-visible { outline: 2px solid var(--brass); outline-offset: 2px; }
+.desk button.long { background: var(--up); color: #f4fff9; font-weight: 700; }
+.desk button.short { background: var(--down); color: #fff6f5; font-weight: 700; }
+.desk button.buy { background: var(--brass); color: var(--ink); font-weight: 750; }
+.desk button.ghost { border-color: rgba(243, 231, 209, 0.45); background: rgba(243, 231, 209, 0.06); color: var(--paper); }
+.desk button.long:hover:not(:disabled),
+.desk button.short:hover:not(:disabled) { filter: brightness(1.08); }
+.desk button.buy:hover:not(:disabled) { filter: brightness(1.05); }
+.desk button.ghost:hover:not(:disabled) { background: rgba(243, 231, 209, 0.14); }
+.desk:not(.desk-still) button.buy.attention { animation: nudge 900ms ease-in-out 2; }
+.desk-boot { display: grid; place-items: center; align-content: center; gap: 12px; padding: 24px; text-align: center; }
+.desk-boot button { background: var(--brass); color: var(--ink); }
+
+.top {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 16px 8px;
+  flex-wrap: nowrap;
+}
+.brand { margin-right: auto; min-width: 0; }
+.brand small {
+  display: block;
+  color: var(--brass);
+  font-size: 10px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+.brand h1 {
+  font: 500 30px/0.95 "Iowan Old Style", Palatino, "Palatino Linotype", Georgia, serif;
+  letter-spacing: -0.03em;
+}
+.stats { display: flex; gap: 16px; }
+.stats div { display: flex; flex-direction: column; gap: 1px; }
+.stats dt { font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); }
+.stats dd { margin: 0; font-variant-numeric: tabular-nums; font-size: 16px; font-weight: 600; white-space: nowrap; }
+.stats dd[data-sign="up"] { color: var(--up-on-dark); }
+.stats dd[data-sign="down"] { color: var(--down-on-dark); }
+
+
+.desk-main {
+  min-height: 0;
+  display: grid;
+  grid-template-columns: minmax(0, 1.25fr) minmax(240px, 0.82fr);
+  gap: 12px;
+  padding: 0 14px;
+}
+.tape {
+  min-height: 0;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  background: var(--paper);
+  color: var(--ink);
+  border-radius: 14px;
+  overflow: auto;
+  overscroll-behavior: contain;
+}
+.tape > [role="radiogroup"] { flex: 1; display: flex; flex-direction: column; min-height: 0; }
+.tape-head {
+  display: flex;
+  justify-content: space-between;
+  gap: 8px;
+  padding: 10px 14px 6px;
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--brass-deep);
+}
+.coin {
+  width: 100%;
+  flex: 1 1 0;
+  min-height: 40px;
+  display: grid;
+  grid-template-columns: 64px minmax(0, 1fr) auto;
+  gap: 8px;
+  align-items: center;
+  padding: 8px 14px;
+  border: 0;
+  border-radius: 0;
+  border-top: 1px solid rgba(36, 28, 20, 0.08);
+  background: transparent;
+  color: inherit;
+  text-align: left;
+  font-variant-numeric: tabular-nums;
+}
+.coin:hover:not(:disabled) { background: rgba(36, 28, 20, 0.04); }
+.coin[aria-checked="true"] { background: var(--ink); color: var(--paper); }
+.sym { font-weight: 700; letter-spacing: 0.04em; }
+.px { font-size: 18px; font-weight: 600; }
+.chg { font-size: 13px; font-weight: 650; }
+.chg[data-dir="up"] { color: var(--up); }
+.chg[data-dir="down"] { color: var(--down); }
+.coin[aria-checked="true"] .chg[data-dir="up"] { color: var(--up-on-dark); }
+.coin[aria-checked="true"] .chg[data-dir="down"] { color: var(--down-on-dark); }
+
+.ticket-pane { min-width: 0; min-height: 0; display: flex; flex-direction: column; gap: 8px; }
+.seat {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex: 0 0 auto;
+  margin: 0;
+  padding: 6px 10px;
+  background: var(--night-2);
+  border: 1px solid rgba(226, 177, 90, 0.35);
+  border-radius: 14px;
+}
+.seat canvas {
+  width: 72px;
+  height: 72px;
+  flex: 0 0 auto;
+  image-rendering: pixelated;
+  background: #1a1612;
+  border-radius: 10px;
+}
+.seat figcaption { display: grid; gap: 6px; font-size: 13px; color: var(--paper); }
+.seat button { justify-self: start; border-color: rgba(243, 231, 209, 0.45); background: rgba(243, 231, 209, 0.06); color: var(--paper); }
+.ticket {
+  flex: 1;
+  min-height: 0;
+  overflow: auto;
+  display: flex;
+  flex-direction: column;
+  background: var(--night-2);
+  border: 1px solid rgba(226, 177, 90, 0.35);
+  border-radius: 14px;
+  padding: 14px 16px 12px;
+}
+.ticket-kicker {
+  color: var(--brass);
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+.ticket h2 {
+  margin: 4px 0 8px;
+  font: 500 28px/1 "Iowan Old Style", Palatino, Georgia, serif;
+  letter-spacing: -0.03em;
+  text-transform: capitalize;
+}
+.stamp {
+  display: inline-block;
+  align-self: flex-start;
+  width: max-content;
+  margin-bottom: 10px;
+  padding: 3px 8px 2px;
+  border: 1.5px solid currentColor;
+  border-radius: 2px;
+  font-size: 11px;
+  font-weight: 750;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+.desk:not(.desk-still) .stamp { animation: stamp-in 420ms ease-out both; }
+@keyframes stamp-in { from { opacity: 0; transform: rotate(-8deg) scale(1.08); } to { opacity: 1; transform: rotate(-2deg); } }
+.stamp-1 { color: var(--down-on-dark); transform: rotate(-2deg); }
+.stamp-2 { color: var(--up-on-dark); transform: rotate(1deg); }
+.stamp-3 { color: var(--brass); transform: rotate(-3deg); }
+.ticket-nums { display: grid; grid-template-columns: 1fr 1fr; gap: 8px 12px; margin-top: 4px; }
+.ticket-nums div { display: flex; flex-direction: column; }
+.ticket-nums dt { font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); }
+.ticket-nums dd { margin: 0; font-variant-numeric: tabular-nums; font-size: 18px; font-weight: 650; }
+.ticket-nums dd[data-sign="up"] { color: var(--up-on-dark); }
+.ticket-nums dd[data-sign="down"] { color: var(--down-on-dark); }
+.fine, .blurb { margin-top: 10px; color: #cbbfaa; font-size: 13px; }
+.ticket .fine { margin-top: auto; padding-top: 10px; }
+.ticket-empty ol, .odds { padding: 0; list-style: none; }
+.ticket-empty ol { margin: 8px 0 12px; display: grid; gap: 6px; }
+.ticket-empty li { font-size: 13px; color: #e6d8c2; }
+.odds { display: grid; gap: 6px; }
+.odds li, .stack li { display: flex; justify-content: space-between; gap: 8px; align-items: baseline; }
+.odds strong, .stack strong { font-weight: 700; }
+.odds span, .stack small { color: var(--muted); font-size: 12px; }
+
+footer { padding: 8px 14px 62px; display: grid; gap: 6px; }
+.actions { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 8px; }
+@keyframes nudge { 50% { transform: translateY(-1px); } }
+.status { min-height: 1.35em; font-size: 12px; color: #d9cbb3; }
+.status[data-kind="error"] { color: var(--down-on-dark); }
+.hint { font-size: 11px; color: var(--muted); }
+
+.sheet {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  display: grid;
+  place-items: center;
+  padding: 16px;
+  background: rgba(12, 10, 8, 0.62);
+}
+.sheet-card {
+  width: min(460px, 100%);
+  max-height: 100%;
+  overflow: auto;
+  background: var(--paper);
+  color: var(--ink);
+  border-radius: 14px;
+  padding: 14px 16px 16px;
+}
+.sheet-bar { display: flex; align-items: center; justify-content: space-between; gap: 8px; margin-bottom: 8px; }
+.sheet-bar h2 { font: 500 26px/1 "Iowan Old Style", Palatino, Georgia, serif; }
+.sheet-bar button, .stack button { border: 1px solid var(--ink); background: transparent; color: var(--ink); }
+.stack { list-style: none; padding: 8px 0 0; display: grid; gap: 8px; }
+.stack li { padding-top: 8px; border-top: 1px solid rgba(36, 28, 20, 0.12); }
+.stack span { display: flex; flex-direction: column; min-width: 0; }
+.stack button:hover:not(:disabled) { background: var(--ink); color: var(--paper); }
+.pending { margin: 8px 0; padding: 8px; background: #f6e2b0; border-radius: 8px; font-size: 13px; }
+.motion { display: flex; align-items: center; gap: 8px; margin-top: 12px; font-size: 13px; }
+.sheet .fine, .sheet .status { color: #5e5144; }
+.sheet .status { margin-top: 8px; }
+
+@container desk (max-width: 720px) {
+  .top { padding: 8px 10px 4px; gap: 8px; }
+  .brand h1 { font-size: 22px; }
+  .stats { gap: 8px; }
+  .stats dd { font-size: 14px; }
+  .desk-main { grid-template-columns: 1fr; grid-template-rows: minmax(0, 1fr) auto; gap: 8px; padding: 0 10px; }
+  .ticket { height: auto; max-height: none; flex: 0 1 auto; }
+  .seat canvas { width: 56px; height: 56px; }
+  .seat { padding: 4px 8px; }
+  .ticket h2 { font-size: 22px; }
+  .ticket-empty ol, .odds, .hint, .fine { display: none; }
+  .ticket { padding: 10px 12px; }
+  .ticket-nums { gap: 4px 8px; }
+  .ticket-nums dd { font-size: 15px; }
+  .stamp { margin-bottom: 6px; }
+  .coin { flex: 0 0 auto; min-height: 36px; padding-block: 4px; }
+  .actions {
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-areas: "long short close" "buy buy prints";
+  }
+  .desk button.long { grid-area: long; }
+  .desk button.short { grid-area: short; }
+  .desk button.close { grid-area: close; }
+  .desk button.buy { grid-area: buy; }
+  .desk button.prints { grid-area: prints; }
+  footer { padding: 6px 10px 52px; }
+  .px { font-size: 16px; }
+}
+@container desk (max-height: 520px) {
+  .top { padding-block: 4px; }
+  .brand h1 { font-size: 20px; }
+  .ticket-empty ol, .odds, .fine, .hint, .blurb { display: none; }
+  .coin { min-height: 32px; padding-block: 2px; }
+  footer { padding-bottom: 46px; }
+}
