@@ -4,6 +4,8 @@ A Rare Friend sits a simulated paper desk. You spend $RAREFRIENDS on a desk chip
 
 **Builder:** [Ramakrishna Bachu / @ramankrishna](https://github.com/ramankrishna) · **Category:** Economy Potential · **SDK:** FriendSDK v0.1.2
 
+Play it at <https://ramankrishna.github.io/wallet-a-desk/>. You need a browser wallet on Robinhood mainnet that holds a hardwired Generations NFT, generation 1 or higher. Nothing in the preview is signed or sent.
+
 ## Run it
 
 Node.js 22 or newer, and a browser wallet that holds a hardwired Rare Friends Generations NFT (generation 1 or higher) on Robinhood mainnet (chain 4663).

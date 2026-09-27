@@ -4,6 +4,8 @@ A Rare Friend runs a **simulated** paper desk. FriendSDK v0.1.2 supplies the wal
 
 The game frame cannot call Hyperliquid (`connect-src` is only the preview itself and Robinhood RPC), so the tape is generated in the desk. Marks walk once a second. They are not exchange prices.
 
+Public preview: <https://ramankrishna.github.io/wallet-a-desk/>. Same wallet requirement. Simulated only.
+
 ## Run
 
 From the FriendSDK root:
